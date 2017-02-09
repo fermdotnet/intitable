@@ -1,0 +1,82 @@
+<div class="inti-loading" *ngIf="loading">Cargando..</div>
+
+<table [ngClass]="settings.tableClass">
+    <thead>
+        <tr>
+            <th
+                *ngFor="let key of keys(settings.columns)"
+                [ngStyle]="{width: settings.columns[key].width || 'auto'}"
+                [ngClass]="[key, (settings.columns[key].sortable) ? 'sortable' : 'no-sortable', (settings.sort.column == key) ? 'selected': '']"
+                (click)="sort(key)"
+            >
+                {{settings.columns[key].title}}
+                <i *ngIf="settings.sort.column == key" class="fa" [ngClass]="{'fa-sort-up': settings.sort.order == 'desc', 'fa-sort-down': settings.sort.order == 'asc'}"></i>
+            </th>
+            <th *ngIf="settings.buttons" [ngStyle]="{width: settings.buttonsWidth || 'auto'}"></th>
+        </tr>
+        <tr *ngIf="settings.search" class="search">
+            <td *ngFor="let key of keys(settings.columns)">
+                <input
+                    class="form-control"
+                    *ngIf="settings.search[key] && settings.search[key].type != 'select'"
+                    [type]="settings.search[key].type"
+                    [(ngModel)]="settings.search[key].value"
+                    (keyup.enter)="search()"
+                />
+                <select
+                    class="form-control"
+                    *ngIf="settings.search[key] && settings.search[key].type == 'select'"
+                    [(ngModel)]="settings.search[key].value"
+                    (change)="search()"
+                >
+                    <option [ngValue]="''"> </option>
+                    <option *ngFor="let item of settings.search[key].data" [ngValue]="item[settings.search[key].key.value]">
+                        {{item[settings.search[key].key.caption]}}
+                    </option>
+                </select>
+            </td>
+            <td *ngIf="settings.buttons"></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of source">
+            <td *ngFor="let key of keys(settings.columns)">
+                <span *ngIf="!settings.columns[key].toggleButton">{{item[key][settings.columns[key].subitem] || item[key]}}</span>
+                <span *ngIf="settings.columns[key].toggleButton" class="buttonToggle" (click)="toggle(key, item)">
+                    <i *ngIf="item[key] == true" class="fa fa-check"></i>
+                    <i *ngIf="item[key] == false" class="fa fa-times"></i>
+                    <i *ngIf="item[key] == null" class="sending fa fa-spinner"></i>
+                </span>
+            </td>
+            <td *ngIf="settings.buttons" class="buttons">
+                <span *ngFor="let keyBtn of keys(settings.buttons)" class="button label" [ngClass]="settings.buttons[keyBtn].bg" (click)="button(keyBtn, item)">
+                    <i class="fa" [ngClass]="settings.buttons[keyBtn].icon"></i>
+                </span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="settings.paginator">
+    <div class="row">
+        <div class="col-xs-8 text-right float-right">
+            <ul class="pagination">
+                <li class="classPageMinRange">
+                    <span (click)="page(1)">«</span>
+                </li>
+                <li [ngClass]="{active: p == settings.paginator.actual}" *ngFor="let p of settings.paginator.pagesFoo">
+                    <span (click)="page(p)">{{p}}</span>
+                </li>
+                <li class="classPageMaxRange">
+                    <span (click)="page(settings.paginator.pagesFoo[settings.paginator.pagesFoo.length-1])">»</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-right info">
+            <p>Página {{settings.paginator.actual}} de {{settings.paginator.pagesFoo[settings.paginator.pagesFoo.length-1]}}, con {{settings.paginator.items}} ítems</p>
+        </div>
+    </div>
+</div>
