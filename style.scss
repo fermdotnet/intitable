@@ -1,0 +1,75 @@
+:host{
+  position: relative;
+  display: block;
+}
+
+.inti-loading{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0.65);
+  z-index: 100;
+  font-family: "Dosis", "Arial", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sortable{
+  cursor: pointer;
+}
+.selected{
+  border-bottom: 2px solid #428bca !important;
+}
+.search{
+  > td{
+    border-top: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+
+    > .form-control{
+      width: 100%;
+      max-width: 180px;
+    }
+  }
+}
+.buttons{
+  text-align: center;
+  vertical-align: middle;
+
+  > span{
+    margin-top: 0;
+    cursor: pointer;
+    margin-left: 5px;
+
+    &:first-child{
+      margin-left: 0;
+    }
+  }
+}
+
+.buttonToggle{
+  .fa-check{
+    color: #5CB85C;
+    cursor: pointer;
+  }
+  .fa-times{
+    color: #D9534F;
+    cursor: pointer;
+  }
+  .sending{
+    cursor: default;
+    animation-name: spin;
+    animation-duration: 2500ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+}
+@keyframes spin{
+  from{ transform: rotate(0deg); }
+  to{ transform: rotate(360deg); }
+}
