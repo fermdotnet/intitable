@@ -1,0 +1,26 @@
+{
+  "name": "intitable",
+  "version": "1.0.0",
+  "description": "DataTable for Angular2",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/intitec/intitable.git"
+  },
+  "keywords": [
+    "angular2",
+    "table",
+    "datatable",
+    "server",
+    "ng2-table"
+  ],
+  "author": "intitec",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/intitec/intitable/issues"
+  },
+  "homepage": "https://github.com/intitec/intitable#readme"
+}
