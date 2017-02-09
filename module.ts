@@ -1,9 +1,10 @@
 import {CommonModule} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 import {NgModule} from "@angular/core";
 import {IntiTableComponent} from "./component";
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [CommonModule, FormsModule],
     providers: [],
     declarations: [IntiTableComponent],
     exports: [IntiTableComponent]
